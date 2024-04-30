@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const crypto = require('crypto');
 
-const id = '244804f8-cdc4-484e-a8f9-6fbf99227b01';
-const secret = 'joicwMieFh0hxq+8EoNZCNoH5x4qIXS3zYm9lG2zDcA=';
+const id = process.env.ID;
+const secret = process.env.SECRET;
 
 const app = express();
 app.use(express.json());
@@ -25,7 +25,8 @@ app.post('/authenticate', (req, res) => {
     }
 
     // Check the sessionToken for your app.
-    if (sessionToken != '4CXS0f19nvMJBYK05o3toTWtZF5Lfd2t6Ikr2lID') {
+    if (sessionToken != process.env.SESSION_TOKEN) {
+        console.log('auth fail!')
         res.status(401).send('Authentication Failed');
     }
 
